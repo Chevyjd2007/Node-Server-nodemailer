@@ -1,7 +1,19 @@
 import EmailService from "../../services/mailService.mjs";
 import mailService from "../../services/mailService.mjs";
 
-export default async (req, res) => {
+import nextConnect from 'next-connect';
+import cors from "cors"
+
+const handler = nextConnect();
+
+//white listing cors for this route
+handler.use(cors({
+    origin: ['http://localhost:5173', 'https://chevy.bio'],
+    methods: ['POST'],
+    credentials: true,
+}))
+
+handler.post(async (req, res) => {
     // Checking the type of request
     if (req.method === "POST") {
         const mail = new EmailService();
@@ -22,4 +34,6 @@ export default async (req, res) => {
 
         res.status(405).json({success : false, response: "This method isn't allowed"});
     }
-}
+})
+
+export default handler;
