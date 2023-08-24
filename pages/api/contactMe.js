@@ -1,5 +1,4 @@
 import EmailService from "../../services/mailService.mjs";
-import mailService from "../../services/mailService.mjs";
 
 import nextConnect from 'next-connect';
 import cors from "cors"
